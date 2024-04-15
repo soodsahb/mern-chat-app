@@ -29,3 +29,9 @@ will use dotev cookie-parse bcryptjs mongoose socet.io jsonwebtoken as backend p
 protect route to check for authentication
 
 user routes for getting sidebar users
+
+
+now we will be moving to frontend and using tailwind css for styling
+
+
+we will be using daisy ui for tailwind
