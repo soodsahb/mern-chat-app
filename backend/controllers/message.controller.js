@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getRecieverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -29,16 +30,21 @@ export const sendMessage = async (req, res) => {
 
     if (newMessage) {
       conversation.messages.push(newMessage._id);
+      
     }
-
-    // await conversation.save();
-    // await newMessage.save();
 
     await Promise.all([conversation.save(), newMessage.save()]);
 
-    res.status(201).json({
-      message: `message sent from ${senderId} to ${recieverId} and this was mee ${newMessage}`,
-    });
+    const recieverSocketId=getRecieverSocketId(recieverId);
+
+    if(recieverSocketId){
+      //now we will send message to reciever
+      io.to(recieverSocketId).emit("newMessage", newMessage);
+    }
+
+    res.status(201).json(newMessage);
+
+   
   } catch (error) {
     console.log("error in send message", error);
     res.status(500).json({ error: "Interval server error" });

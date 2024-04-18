@@ -35,3 +35,6 @@ now we will be moving to frontend and using tailwind css for styling
 
 
 we will be using daisy ui for tailwind
+
+
+will be using zustand for state management

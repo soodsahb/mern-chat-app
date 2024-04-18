@@ -8,10 +8,11 @@ import messageRoutes from '../backend/routes/message.route.js'
 import userRoutes from '../backend/routes/users.routes.js'
 import connectToMongoDb from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
+import { app, server } from "./socket/socket.js"
 
 dotenv.config();
 //creating server with express
-const app=express();
+
 
 //listening server
 
@@ -19,8 +20,8 @@ const app=express();
 const PORT=process.env.PORT||5000;
 
 // we will be importing mongodb function from db and connect to database when server starts
-
-app.listen(PORT,()=>{
+//server is socket connection
+server.listen(PORT,()=>{
     connectToMongoDb();
     console.log(`server is running on port ${PORT}`);
 });
