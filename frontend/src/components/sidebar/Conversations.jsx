@@ -13,6 +13,7 @@ const Conversations = () => {
 	const{loading,conversations}=useGetConversations();
 	console.log(conversations);
 	const users=conversations.users;
+	console.log(users);
 	return (
 		<div className='py-2 flex flex-col overflow-auto'>
 			{users?.map((conversation, idx) => (
